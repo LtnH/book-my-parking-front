@@ -1,7 +1,26 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box } from '@mui/material';
+import dayjs, { Dayjs } from 'dayjs';
+import { DateField } from '@mui/x-date-pickers/DateField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TextField, Button, Box, Autocomplete } from '@mui/material';
 
-export default function Signup() {
+
+const organisation = [
+  { label: 'ESGI', value: 1 },
+  { label: 'Toto', value: 2 },
+  { label: 'tata', value: 3 },
+]
+
+const building = [
+  { label: 'building 1', value: 1 },
+  { label: 'building 2', value: 2 },
+  { label: 'building 3', value: 3 },
+]
+
+
+export default function AddPlace() {
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-17'));
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirm, setPasswordCofirm] = useState("")
@@ -53,43 +72,28 @@ export default function Signup() {
       sx={{ marginLeft: "auto", marginRight: "auto" }}
     >
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <h3>Créez votre compte</h3>
-        <TextField
-          label="Email"
-          onChange={e => setEmail(e.target.value)}
-          required
-          variant="outlined"
-          color="secondary"
-          type="email"
+        <h3>Créez npm start </h3>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={organisation}
           sx={{ mb: 3 }}
-          fullWidth
-          value={email}
-          error={emailError}
+          renderInput={(params) => <TextField {...params} label="Organisation" />}
         />
-        <TextField
-          label="Password"
-          onChange={e => setPassword(e.target.value)}
-          required
-          variant="outlined"
-          color="secondary"
-          type="password"
-          value={password}
-          error={passwordError}
-          fullWidth
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={building}
           sx={{ mb: 3 }}
+          renderInput={(params) => <TextField {...params} label="Building" />}
         />
-        <TextField
-          label="comfirmé votre Password"
-          onChange={e => setPasswordCofirm(e.target.value)}
-          required
-          variant="outlined"
-          color="secondary"
-          type="password"
-          value={passwordConfirm}
-          error={passwordConfirmError}
-          fullWidth
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DateField
+          label="date"
           sx={{ mb: 3 }}
+          onChange={(newValue) => setValue(newValue)}
         />
+          </LocalizationProvider >
         <TextField
           label="Nom"
           onChange={e => setName(e.target.value)}
@@ -119,11 +123,3 @@ export default function Signup() {
     </Box>
   );
 }
-
-
-
-
-
-
-
-

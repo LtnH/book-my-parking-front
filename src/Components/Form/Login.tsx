@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { AppBar, Drawer, MenuItem, IconButton, Paper, TextField, Button, Box } from '@mui/material';
+import { AppBar, Drawer, MenuItem, IconButton, Paper, TextField, Button, Box, Typography } from '@mui/material';
 import { SetStateAction, useState } from "react";
 import firebase from "firebase/compat";
 
-type redirectToHome  = () => void
+type redirectToHome = () => void
 export default function Login({ redirectToHome }: Readonly<{ redirectToHome: redirectToHome }>) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -36,24 +36,27 @@ export default function Login({ redirectToHome }: Readonly<{ redirectToHome: red
       component="form"
       display="inline-block"
       alignItems="center"
+      textAlign="center"
       noValidate
       autoComplete="off"
-      sx={{ marginLeft: "auto", marginRight: "auto" }}
+      sx={{ marginLeft: "auto", marginRight: "auto", marginTop: "5%" }}
       onSubmit={handleSubmit}
     >
-      <h3>Connection</h3>
-      <TextField
-        label="Email"
-        onChange={e => setEmail(e.target.value)}
-        required
-        variant="outlined"
-        color="secondary"
-        type="email"
-        sx={{ mb: 3 }}
-        fullWidth
-        value={email}
-        error={emailError}
-      />
+      <Typography variant="h5" className="form-title">
+        Connectez-vous :
+      </Typography> <TextField
+      label="Email"
+      onChange={e => setEmail(e.target.value)}
+      required
+      variant="outlined"
+      color="secondary"
+      type="email"
+      sx={{ mb: 3 }}
+      fullWidth
+      value={email}
+      error={emailError}
+      className="input-field"
+    />
       <TextField
         label="Password"
         onChange={e => setPassword(e.target.value)}
@@ -65,8 +68,10 @@ export default function Login({ redirectToHome }: Readonly<{ redirectToHome: red
         error={passwordError}
         fullWidth
         sx={{ mb: 3 }}
+        className="input-field"
       />
-      <Button variant="contained" color="primary" type="submit">Login</Button>
+      <Button variant="contained" color="primary" type="submit" className="submit-button"
+      >Login</Button>
     </Box>
   );
 }

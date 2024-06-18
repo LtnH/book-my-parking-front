@@ -43,7 +43,7 @@ export default function NavBar({ isLogin, signIn, setSignIn }: Readonly<{
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: 'top',
+                    vertical: 'bottom',
                     horizontal: 'right',
                   }}
                   keepMounted

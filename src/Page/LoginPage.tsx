@@ -1,11 +1,10 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Login from '../Components/Form/login'
-import Signup from "../Components/Form/signup";
+import Login from '../Components/Form/Login'
+import Signup from "../Components/Form/Signup";
 import '../CSS/nav.css'
-import NavBar from '../Components/NavBar/NavBar'
 import { SetStateAction } from "react";
-
+import '../App.css';
 
 export default function LoginPage({auth, setAuth, signIn, setSignIn}: Readonly<{
   auth: boolean,
@@ -21,7 +20,7 @@ export default function LoginPage({auth, setAuth, signIn, setSignIn}: Readonly<{
   }
 
   return (
-    <div>
+    <div className="App">
       {signIn ? (<Signup/>) : (<Login redirectToHome={redirectToHome}/>)}
     </div>
 

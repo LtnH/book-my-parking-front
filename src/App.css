@@ -36,3 +36,85 @@
     transform: rotate(360deg);
   }
 }
+
+/* Container for the login page */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background shapes */
+.background-shape {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: white;
+  z-index: -1;
+}
+
+.background-shape.left {
+  bottom: 0;
+  left: 0;
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  background-color: #007bff; /* Blue shape */
+}
+
+.background-shape.right {
+  bottom: 0;
+  right: 0;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 0);
+  background-color: #ffa500; /* Orange shape */
+}
+
+/* Box for the logo and title */
+.logo-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 100px;
+}
+
+.title {
+  color: #ffa500; /* Orange color */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Box for the form */
+.form-box {
+  width: 100%;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+  margin-bottom: 10px;
+  color: #ffa500; /* Orange color */
+  font-family: 'Arial', sans-serif;
+}
+
+.input-field {
+  background-color: #f0f0f0; /* Light gray background for input fields */
+  border-radius: 5px;
+}
+
+.submit-button {
+  background-color: #007bff; /* Blue color */
+  color: white;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

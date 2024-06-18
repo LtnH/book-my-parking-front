@@ -16,11 +16,15 @@ export default function LocationDetail() {
   schedulerData.setCalendarPopoverLocale('fr_FR');
 
   schedulerData.setResources([
-    { id: 'r0', name: 'Resource0', groupOnly: true },
-    { id: 'r1', name: 'Resource1' },
-    { id: 'r2', name: 'Resource2', parentId: 'r0' },
-    { id: 'r3', name: 'Resource3', parentId: 'r4' },
-    { id: 'r4', name: 'Resource4', parentId: 'r2' },
+    { id: 'r0', name: 'site RH', groupOnly: true },
+    { id: 'r2', name: 'Place 1', parentId: 'r0' },
+    { id: 'r3', name: 'Place 2', parentId: 'r0' },
+    { id: 'r4', name: 'Place 3', parentId: 'r0' },
+    { id: 'r5', name: 'Place 4', parentId: 'r0' },
+    { id: 'r6', name: 'Place 5', parentId: 'r0' },
+    { id: 'r7', name: 'Place 6', parentId: 'r0' },
+    { id: 'r8', name: 'Place 7', parentId: 'r0' },
+    { id: 'r9', name: 'Place 8', parentId: 'r0' },
   ]);
 
 // the event array should be sorted in ascending order by event.start property
@@ -63,7 +67,7 @@ export default function LocationDetail() {
       start: '2022-12-19 15:30:00',
       end: '2022-12-20 23:30:00',
       resourceId: 'r2',
-      title: 'R2 has recurring tasks every week on Tuesday, Friday',
+      title: 'Place 1 est réservé',
       rrule: 'FREQ=WEEKLY;DTSTART=20221219T013000Z;BYDAY=TU,FR',
       bgColor: '#f759ab',
     },
