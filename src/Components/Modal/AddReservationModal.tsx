@@ -19,9 +19,10 @@ import {
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 import { DatePicker, TimePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
+import { ElectricCar } from "@mui/icons-material";
 
 interface AddReservationModalProps {
   open: boolean;
@@ -35,8 +36,10 @@ interface AddReservationModalProps {
 interface Reservation {
   company: string;
   building: string;
-  date: Dayjs | null;
-  time: Dayjs | null;
+  startDate: Dayjs | null;
+  endDate: Dayjs | null;
+  startTime: Dayjs | null;
+  endTime: Dayjs | null;
   vehicleTypes: string[];
   place: string;
 }
@@ -52,8 +55,10 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
   const [reservation, setReservation] = useState<Reservation>({
     company: companies[0],
     building: buildings[0],
-    date: null,
-    time: null,
+    startDate: null,
+    endDate: null,
+    startTime: null,
+    endTime: null,
     vehicleTypes: [],
     place: places[0],
   });
@@ -74,17 +79,31 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
     });
   };
 
-  const handleDateChange = (date: Dayjs | null) => {
+  const handleStartDateChange = (date: Dayjs | null) => {
     setReservation({
       ...reservation,
-      date: date,
+      startDate: date,
     });
   };
 
-  const handleTimeChange = (time: Dayjs | null) => {
+  const handleEndDateChange = (date: Dayjs | null) => {
     setReservation({
       ...reservation,
-      time: time,
+      endTime: date,
+    });
+  };
+
+  const handleStartTimeChange = (time: Dayjs | null) => {
+    setReservation({
+      ...reservation,
+      startTime: time,
+    });
+  };
+
+  const handleEndTimeChange = (time: Dayjs | null) => {
+    setReservation({
+      ...reservation,
+      endTime: time,
     });
   };
 
@@ -104,8 +123,10 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
     setReservation({
       company: companies[0],
       building: buildings[0],
-      date: null,
-      time: null,
+      startDate: null,
+      endDate: null,
+      startTime: null,
+      endTime: null,
       vehicleTypes: [],
       place: places[0],
     });
@@ -145,15 +166,31 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
           </Select>
         </FormControl>
         <DatePicker
-          label="Date"
-          value={reservation.date}
-          onChange={handleDateChange}
+          label="Date de début"
+          value={reservation.startDate}
+          onChange={handleStartDateChange}
+          sx={{ mb: 2, mr: 5 }}
+          // renderInput={(params) => <TextField {...params} fullWidth margin="dense" sx={{ mb: 2 }} />}
+        />
+        <DatePicker
+          label="Date de fin"
+          value={reservation.endDate}
+          onChange={handleEndDateChange}
+          sx={{ mb: 2 }}
           // renderInput={(params) => <TextField {...params} fullWidth margin="dense" sx={{ mb: 2 }} />}
         />
         <TimePicker
-          label="Heure"
-          value={reservation.time}
-          onChange={handleTimeChange}
+          label="Heure de début"
+          value={reservation.startDate}
+          onChange={handleStartTimeChange}
+          sx={{ mb: 2, mr: 5 }}
+          // renderInput={(params) => <TextField {...params} fullWidth margin="dense" sx={{ mb: 2 }} />}
+        />
+        <TimePicker
+          label="Heure de fin"
+          value={reservation.endTime}
+          onChange={handleEndTimeChange}
+          sx={{ mb: 2 }}
           // renderInput={(params) => <TextField {...params} fullWidth margin="dense" sx={{ mb: 2 }} />}
         />
         <Typography variant="subtitle1" sx={{ marginTop: 2 }}>
@@ -199,14 +236,14 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
           <FormControlLabel
             control={
               <Checkbox
-                icon={<LocalShippingIcon />}
-                checkedIcon={<LocalShippingIcon />}
-                value="Camion"
-                checked={reservation.vehicleTypes.includes('Camion')}
+                icon={<ElectricCarIcon />}
+                checkedIcon={<ElectricCarIcon/>}
+                value="Electric"
+                checked={reservation.vehicleTypes.includes('Electric')}
                 onChange={handleVehicleTypeChange}
               />
             }
-            label="Camion"
+            label="Electric"
           />
         </FormGroup>
         <FormControl fullWidth margin="dense" sx={{ mb: 2 }}>

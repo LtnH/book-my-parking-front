@@ -120,7 +120,7 @@ export default function Signup() {
           sx={{ mb: 3 }}
         />
         <Typography variant="subtitle1" sx={{ marginTop: 2, textAlign: "left" }}>
-          Type de place
+          Place préférer
         </Typography>
         <VehicleSelection selectedTypes={type} onChange={handleTypeChange} />
         <Button variant="contained" color="primary" type="submit">sign in</Button>

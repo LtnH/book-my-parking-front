@@ -3,7 +3,7 @@ import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ElectricCarIcon from '@mui/icons-material/ElectricCar';
 
 interface VehicleSelectionProps {
   selectedTypes: string[];
@@ -14,7 +14,7 @@ const vehicleTypes = [
   { label: 'Vélo', icon: <DirectionsBikeIcon />, value: 'Vélo' },
   { label: 'Moto', icon: <TwoWheelerIcon />, value: 'Moto' },
   { label: 'Voiture', icon: <DirectionsCarIcon />, value: 'Voiture' },
-  { label: 'Camion', icon: <LocalShippingIcon />, value: 'Camion' },
+  { label: 'Electric', icon: <ElectricCarIcon />, value: 'Electric' },
 ];
 
 const VehicleSelection: React.FC<VehicleSelectionProps> = ({ selectedTypes, onChange }) => {
