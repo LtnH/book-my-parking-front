@@ -1,35 +1,57 @@
 import * as React from 'react';
-import { AppBar, Drawer, MenuItem, IconButton, Paper, TextField, Button, Box, Typography } from '@mui/material';
-import { SetStateAction, useState } from "react";
-import firebase from "firebase/compat";
+import { Box, TextField, Button, Typography } from '@mui/material';
+import { useState } from "react";
+import axios from '../../axiosConfig'; // Importez la configuration Axios
 
-type redirectToHome = () => void
-export default function Login({ redirectToHome }: Readonly<{ redirectToHome: redirectToHome }>) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [emailError, setEmailError] = useState(false)
-  const [passwordError, setPasswordError] = useState(false)
+type RedirectToHome = () => void;
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+interface LoginProps {
+  redirectToHome: RedirectToHome;
+}
 
-    event.preventDefault()
+export default function Login({ redirectToHome }: LoginProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [message, setMessage] = useState("");
 
-    setEmailError(false)
-    setPasswordError(false)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    if (email == '') {
-      setEmailError(true)
+    setEmailError(false);
+    setPasswordError(false);
+    setMessage("");
+
+    if (email === '') {
+      setEmailError(true);
     }
-    if (password == '') {
-      setPasswordError(true)
+    if (password === '') {
+      setPasswordError(true);
     }
 
     if (email && password) {
-      console.log(email, password)
-      redirectToHome()
-    }
-  }
+      try {
+        const response = await axios.post('http://localhost:8000/api/login/', {
+          username: email,
+          password: password,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
+        if (response.status === 200) {
+          setMessage('Logged in successfully');
+          redirectToHome();
+        } else {
+          setMessage('Invalid credentials');
+        }
+      } catch (error) {
+        setMessage('Invalid credentials');
+      }
+    }
+  };
 
   return (
     <Box
@@ -44,19 +66,20 @@ export default function Login({ redirectToHome }: Readonly<{ redirectToHome: red
     >
       <Typography variant="h5" className="form-title">
         Connectez-vous :
-      </Typography> <TextField
-      label="Email"
-      onChange={e => setEmail(e.target.value)}
-      required
-      variant="outlined"
-      color="secondary"
-      type="email"
-      sx={{ mb: 3 }}
-      fullWidth
-      value={email}
-      error={emailError}
-      className="input-field"
-    />
+      </Typography>
+      <TextField
+        label="Email"
+        onChange={e => setEmail(e.target.value)}
+        required
+        variant="outlined"
+        color="secondary"
+        type="email"
+        sx={{ mb: 3 }}
+        fullWidth
+        value={email}
+        error={emailError}
+        className="input-field"
+      />
       <TextField
         label="Password"
         onChange={e => setPassword(e.target.value)}
@@ -72,9 +95,16 @@ export default function Login({ redirectToHome }: Readonly<{ redirectToHome: red
       />
       <Button variant="contained" color="primary" type="submit" className="submit-button"
       >Login</Button>
+      {message && (
+        <Typography variant="body2" color="error" className="error-message">
+          {message}
+        </Typography>
+      )}
     </Box>
   );
 }
+
+
 const style = {
   margin: 15,
 };
