@@ -3,6 +3,7 @@ import { Container, Typography, Card, CardContent, Button, Grid, useTheme } from
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { format, isToday, isAfter } from 'date-fns';
+import { EventItem, Resource } from "react-big-schedule";
 
 interface Reservation {
   id: number;
@@ -44,13 +45,36 @@ const reservations: Reservation[] = [
 ];
 
 interface ReservationCardProps {
-  reservation: Reservation;
+  reservation: EventItem;
+  resources: Resource[],
   showActions?: boolean;
+  site: {
+    id: string;
+    name: string;
+    address: string;
+    city: string;
+    companyId: string
+  }[];
   type: 'today' | 'upcoming' | 'past';
 }
 
-const ReservationCard: React.FC<ReservationCardProps> = ({ reservation, showActions = false, type }) => {
+const ReservationCard: React.FC<ReservationCardProps> = ({
+                                                           reservation,
+                                                           resources,
+                                                           site,
+                                                           showActions = false,
+                                                           type
+                                                         }) => {
   const theme = useTheme();
+  const useResource: Resource = resources.find(p => p.id === reservation.resourceId) as Resource;
+  // @ts-ignore
+  const useSite: {
+    id: string;
+    name: string;
+    address: string;
+    city: string;
+    companyId: string
+  } = site.find(p => p.id === useResource.parentId)
 
   const getBackgroundColor = () => {
     switch (type) {
@@ -65,6 +89,7 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ reservation, showActi
     }
   };
 
+  // @ts-ignore
   return (
     <Card
       variant="outlined"
@@ -80,18 +105,18 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ reservation, showActi
       }}
     >
       <CardContent>
-        <Typography variant="h6">{reservation.place}</Typography>
-        <Typography variant="body1">Heure de début : {reservation.time}</Typography>
-        <Typography variant="body2">site : {reservation.building}</Typography>
-        <Typography variant="body2">Date de début : {format(new Date(reservation.date), 'dd/MM/yyyy')}</Typography>
-        <Typography variant="body2">Date de fin : {format(new Date(reservation.date), 'dd/MM/yyyy')}</Typography>
-        <Typography variant="body2">Heure de début : {reservation.time}</Typography>
-        <Typography variant="body2">Heure de fin : {reservation.time}</Typography>
+        <Typography variant="h6">{useResource.name}</Typography>
+        <Typography variant="body1">{useSite.address} </Typography>
+        <Typography variant="body2">site : {useSite.name}</Typography>
+        <Typography variant="body2">Date de début : {format(new Date(reservation.start), 'dd/MM/yyyy')}</Typography>
+        <Typography variant="body2">Date de fin : {format(new Date(reservation.end), 'dd/MM/yyyy')}</Typography>
+        <Typography variant="body2">Heure de début : {format(new Date(reservation.start), 'HH:mm')}</Typography>
+        <Typography variant="body2">Heure de fin : {format(new Date(reservation.end), 'HH:mm')}</Typography>
         {showActions && (
           <div style={{ marginTop: 16 }}>
-            <Button variant="text" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+            <Button variant="text" startIcon={<EditIcon/>} sx={{ marginRight: 1 }}>
             </Button>
-            <Button variant="text" color="error" startIcon={<DeleteIcon />}>
+            <Button variant="text" color="error" startIcon={<DeleteIcon/>}>
             </Button>
           </div>
         )}
@@ -100,13 +125,32 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ reservation, showActi
   );
 };
 
-const Reservations: React.FC = () => {
+function Reservations({ reservations, user, site, resources }: {
+  reservations: EventItem[], user: { userId: number; isAdmin: boolean } | null, site: {
+    id: string;
+    name: string;
+    address: string;
+    city: string;
+    companyId: string
+  }[],
+  resources: Resource[],
+}) {
+  console.log(user)
+
   const today = new Date();
+  // @ts-ignore
+  const reservation = reservations.filter(p => p.userId === user.userId) as EventItem[]
 
-  const todayReservations = reservations.filter(r => isToday(new Date(r.date)));
-  const upcomingReservations = reservations.filter(r => isAfter(new Date(r.date), today) && !isToday(new Date(r.date)));
-  const pastReservations = reservations.filter(r => !isAfter(new Date(r.date), today));
+  let todayReservations: EventItem[] = [];
+  let upcomingReservations: EventItem[] = [];
+  let pastReservations: EventItem[] = [];
 
+  console.log(reservation)
+  if (reservation.length > 0) {
+    todayReservations = reservation.filter(r => isToday(new Date(r.start)));
+    upcomingReservations = reservation.filter(r => isAfter(new Date(r.start), today) && !isToday(new Date(r.start)));
+    pastReservations = reservation.filter(r => !isAfter(new Date(r.start), today));
+  }
   return (
     <Container sx={{ marginTop: 4, marginLeft: 0 }}>
       <Typography variant="h4" gutterBottom sx={{ marginBottom: 2, color: '#3f51b5' }}>
@@ -120,7 +164,7 @@ const Reservations: React.FC = () => {
           <Grid container spacing={2}>
             {todayReservations.map(reservation => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={reservation.id}>
-                <ReservationCard reservation={reservation} showActions type="today" />
+                <ReservationCard reservation={reservation} resources={resources} site={site} showActions type="today"/>
               </Grid>
             ))}
           </Grid>
@@ -133,7 +177,7 @@ const Reservations: React.FC = () => {
         <Grid container spacing={2}>
           {upcomingReservations.map(reservation => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={reservation.id}>
-              <ReservationCard reservation={reservation} showActions type="upcoming" />
+              <ReservationCard reservation={reservation} resources={resources} site={site} showActions type="upcoming"/>
             </Grid>
           ))}
         </Grid>
@@ -144,11 +188,11 @@ const Reservations: React.FC = () => {
         Passées :
       </Typography>
       <Grid container spacing={2}>
-        {pastReservations.map(reservation => (
+        {reservation.length >0 && (pastReservations.map(reservation => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={reservation.id}>
-            <ReservationCard reservation={reservation} type="past" />
+            <ReservationCard reservation={reservation} resources={resources} site={site} type="past"/>
           </Grid>
-        ))}
+        )))}
       </Grid>
     </Container>
   );

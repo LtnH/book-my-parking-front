@@ -2,28 +2,49 @@ import * as React from "react";
 import { AppBar, Button, IconButton, Toolbar, Typography, Box, Menu, MenuItem } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { AccountCircle } from "@mui/icons-material";
-import { SetStateAction } from "react";
-import {Link, redirect } from "react-router-dom";
+import { SetStateAction, useEffect } from "react";
+import { Link, redirect, useNavigate } from "react-router-dom";
 
-export default function NavBar({ isLogin, signIn, setSignIn }: Readonly<{
+export default function NavBar({ isLogin, signIn, setSignIn, setAuth, user }: Readonly<{
   isLogin: boolean,
   signIn: boolean,
   setSignIn: SetStateAction<any>
+  setAuth: SetStateAction<any>
+  user: { userId: number; isAdmin: boolean } | null
 }>) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
+  console.log(user?.isAdmin)
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleHome = () => {
+    navigate("/home")
+  }
+
+  const handleReservation = () => {
+    navigate("/reservation")
+  }
+  const handleDeconnection = () => {
+    setAuth(false)
+    navigate("/")
+  }
+
+
+  const handleAdmin = (event: any) => {
+    navigate("/admin")
+  };
+  const handleClose = (event: any) => {
+    console.log(event)
     setAnchorEl(null);
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h2" component="div" sx={{ flexGrow: 1 }} onClick={handleHome}>
             Book My Parking
           </Typography>
           {isLogin ?
@@ -55,8 +76,9 @@ export default function NavBar({ isLogin, signIn, setSignIn }: Readonly<{
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>Mes Réservations</MenuItem>
-                  <MenuItem onClick={handleClose}>Déconnection</MenuItem>
+                  {user?.isAdmin === true && (<MenuItem onClick={handleAdmin}>Administration</MenuItem>)}
+                  <MenuItem onClick={handleReservation}>Mes Réservations</MenuItem>
+                  <MenuItem onClick={handleDeconnection}>Déconnection</MenuItem>
                 </Menu>
               </div>
 

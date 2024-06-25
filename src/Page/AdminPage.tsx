@@ -23,6 +23,7 @@ interface Building {
   name: string;
   address: string;
   city: string;
+  place: number;
   company: string[];
 }
 
@@ -33,19 +34,19 @@ interface Place {
 }
 
 const initialBuildings: Building[] = [
-  { name: 'site RH', address: '40 rue du bouldodrome', city: 'Lyon', company: ['ESGI'] },
-  { name: 'site R&D', address: '41 rue du bouldodrome', city: 'Lyon', company: ['ESGI'] },
-  { name: 'site 3', address: '43 rue du bouldodrome', city: 'Lyon', company: ['ESGI'] },
-  { name: 'site SV', address: '35 rue du bouldodrome', city: 'Lyon', company: ['ESGI'] },
+  { name: 'ESGI Lyon', address: '40 rue du bouldodrome 690001', city: 'Lyon', company: ['ESGI'], place: 8 },
+
 ];
 
 const initialPlaces: Place[] = [
-  { number: 1, building: 'site RH', type: ['Moto'] },
-  { number: 2, building: 'site RH', type: ['Voiture'] },
-  { number: 3, building: 'site RH', type: ['Voiture'] },
-  { number: 4, building: 'site RH', type: ['Voiture'] },
-  { number: 5, building: 'site RH', type: ['Voiture'] },
-  { number: 6, building: 'site RH', type: ['Voiture'] },
+  { number: 1, building: 'ESGI Lyon', type: ['Moto'] },
+  { number: 2, building: 'ESGI Lyon', type: ['Voiture'] },
+  { number: 3, building: 'ESGI Lyon', type: ['Voiture'] },
+  { number: 4, building: 'ESGI Lyon', type: ['Voiture'] },
+  { number: 5, building: 'ESGI Lyon', type: ['Voiture'] },
+  { number: 6, building: 'ESGI Lyon', type: ['Voiture'] },
+  { number: 7, building: 'ESGI Lyon', type: ['Voiture'] },
+  { number: 8, building: 'ESGI Lyon', type: ['Voiture'] },
 ];
 
 const AdminPage: React.FC = () => {
@@ -99,6 +100,12 @@ const AdminPage: React.FC = () => {
       setPlaces(places.map(p => (p === placeToEdit ? newPlace : p)));
     } else {
       setPlaces([...places, newPlace]);
+      setBuildings(buildings.map(function (b){
+        if (b.name === newPlace.building) {
+          b.place += 1
+        }
+        return b;
+      }))
     }
   };
 
@@ -138,7 +145,8 @@ const AdminPage: React.FC = () => {
               <TableCell sx={{ color: '#fff' }}>Adresse</TableCell>
               <TableCell sx={{ color: '#fff' }}>Ville</TableCell>
               <TableCell sx={{ color: '#fff' }}>Société</TableCell>
-              <TableCell sx={{ color: '#fff' }}>Actions</TableCell>
+              <TableCell sx={{ color: '#fff' }}>Nombre de place</TableCell>
+              <TableCell sx={{ color: '#fff' }} align="left">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -148,7 +156,8 @@ const AdminPage: React.FC = () => {
                 <TableCell>{building.address}</TableCell>
                 <TableCell>{building.city}</TableCell>
                 <TableCell>{building.company.join(', ')}</TableCell>
-                <TableCell align="left">
+                <TableCell>{building.place}</TableCell>
+                <TableCell>
                   <IconButton color="primary" onClick={() => handleOpenEditBuildingModal(building)}>
                     <EditIcon />
                   </IconButton>
@@ -205,7 +214,7 @@ const AdminPage: React.FC = () => {
       </TableContainer>
 
       <AddBuildingModal open={openBuildingModal} onClose={handleCloseBuildingModal} onAdd={handleAddBuilding} buildingToEdit={buildingToEdit} />
-      <AddPlaceModal open={openPlaceModal} onClose={handleClosePlaceModal} onAdd={handleAddPlace} buildings={buildings.map(b => b.name)} placeToEdit={placeToEdit} />
+      <AddPlaceModal open={openPlaceModal} onClose={handleClosePlaceModal} onAdd={handleAddPlace} buildings={buildings} places={places} placeToEdit={placeToEdit} />
     </Container>
   );
 };

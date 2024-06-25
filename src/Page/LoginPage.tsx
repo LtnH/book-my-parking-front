@@ -14,8 +14,8 @@ export default function LoginPage({auth, setAuth, signIn, setSignIn}: Readonly<{
 }>) {
 
   const navigate = useNavigate();
-  const redirectToHome = (): void => {
-    setAuth(true)
+  const redirectToHome = (email: string): void => {
+    setAuth(email)
     return navigate('/home')
   }
 

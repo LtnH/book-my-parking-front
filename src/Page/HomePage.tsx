@@ -20,7 +20,7 @@ export default function HomePage({reservation, setReservation, resources, site, 
     const schedulerData = new SchedulerData(dayjs().format(DATE_FORMAT), ViewType.Week, false, false, {
         addMorePopoverHeaderFormat: 'D MMM, YYYY dddd',
         eventItemPopoverDateFormat: 'D MMM',
-        nonAgendaDayCellHeaderFormat: 'ha',
+        nonAgendaDayCellHeaderFormat: 'HH',
         nonAgendaOtherCellHeaderFormat: 'ddd D/M',
         resourceName: 'Site',
         views: [
@@ -39,8 +39,8 @@ export default function HomePage({reservation, setReservation, resources, site, 
     const [viewModel, setViewModel] = React.useState(schedulerData)
 
     const reloadScheduler = () => {
-        schedulerData.setEvents(reservation);
-        setViewModel(schedulerData)
+        viewModel.setEvents(reservation);
+        setViewModel(viewModel)
     }
 
     const handleOpen = () => setOpen(true);
@@ -60,7 +60,9 @@ export default function HomePage({reservation, setReservation, resources, site, 
             end: newReservation.endDate.format("YYYY-MM-DD").toString() + ' ' + newReservation.endTime.format("HH:mm:ss").toString(),
             // @ts-ignore
             resourceId: place.find(p => p.name === newReservation.place).id,
-            title: "reservé " + newReservation.startTime.format("H").toString() + 'h' + newReservation.startTime.format("mm").toString() + '-' + newReservation.endTime.format("H").toString() + 'h' + newReservation.endTime.format("mm").toString()
+            title: "reservé " + newReservation.startTime.format("H").toString() + 'h' + newReservation.startTime.format("mm").toString() + '-' + newReservation.endTime.format("H").toString() + 'h' + newReservation.endTime.format("mm").toString(),
+            bgColor: '#2057a5',
+            userId: 1,
         }
         reservation.push(newRes)
         setReservation(reservation)
@@ -96,7 +98,7 @@ export default function HomePage({reservation, setReservation, resources, site, 
                 <Button variant="contained" onClick={handleOpen} sx={{marginRight: "3%", marginBottom: '3%'}}>Réserver une place</Button>
             </div>
             </div>
-            <LocationDetail reservation={reservation} resources={resources} viewModel={viewModel} setViewModel={setViewModel}/>
+            <LocationDetail reservation={reservation} resources={resources} viewModel={viewModel} setViewModel={setViewModel} reloadScheduler={reloadScheduler}/>
             <AddReservationModal
                 open={open}
                 onClose={handleClose}

@@ -204,8 +204,8 @@ const AdminPage: React.FC = () => {
                 </Table>
             </TableContainer>
 
-            <AddBuildingModal open={openBuildingModal} onClose={handleCloseBuildingModal} onAdd={handleAddBuilding} buildingToEdit={buildingToEdit} />
-            <AddPlaceModal open={openPlaceModal} onClose={handleClosePlaceModal} onAdd={handleAddPlace} buildings={buildings.map(b => b.name)} placeToEdit={placeToEdit} />
+            {/*<AddBuildingModal open={openBuildingModal} onClose={handleCloseBuildingModal} onAdd={handleAddBuilding} buildingToEdit={buildingToEdit} />*/}
+            {/*<AddPlaceModal open={openPlaceModal} onClose={handleClosePlaceModal} onAdd={handleAddPlace} buildings={buildings.map(b => b.name)} placeToEdit={placeToEdit} />*/}
         </Container>
     );
 };

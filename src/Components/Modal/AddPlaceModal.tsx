@@ -18,7 +18,8 @@ interface AddPlaceModalProps {
   open: boolean;
   onClose: () => void;
   onAdd: (newPlace: Place) => void;
-  buildings: string[];
+  places: Place[];
+  buildings: Building[];
   placeToEdit?: Place;
 }
 
@@ -28,12 +29,22 @@ interface Place {
   type: string[];
 }
 
-const AddPlaceModal: React.FC<AddPlaceModalProps> = ({ open, onClose, onAdd, buildings, placeToEdit }) => {
+interface Building {
+  name: string;
+  address: string;
+  city: string;
+  place: number;
+  company: string[];
+}
+
+const AddPlaceModal: React.FC<AddPlaceModalProps> = ({ open, onClose, onAdd, buildings, places, placeToEdit }) => {
+  const listBuilding = buildings.map(b => b.name)
   const [place, setPlace] = useState<Place>({
     number: 0,
-    building: buildings[0],
+    building: '',
     type: [],
   });
+
 
   useEffect(() => {
     if (placeToEdit) {
@@ -51,10 +62,20 @@ const AddPlaceModal: React.FC<AddPlaceModalProps> = ({ open, onClose, onAdd, bui
 
   const handleSelectChange = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
+    console.log(value);
     setPlace({
       ...place,
       [name as string]: value as string,
     });
+    console.log(place);
+    if (name === 'building') {
+      setPlace({
+        ...place,
+        [name as string]: value as string,
+        number: places.filter(p => p.building === value).length + 1
+      })
+      console.log(place);
+    }
   };
 
   const handleTypeChange = (selectedTypes: string[]) => {
@@ -68,7 +89,7 @@ const AddPlaceModal: React.FC<AddPlaceModalProps> = ({ open, onClose, onAdd, bui
     onAdd(place);
     setPlace({
       number: 0,
-      building: buildings[0],
+      building: '',
       type: [],
     });
     onClose();
@@ -79,6 +100,7 @@ const AddPlaceModal: React.FC<AddPlaceModalProps> = ({ open, onClose, onAdd, bui
       <DialogTitle>{placeToEdit ? 'Modifier une place' : 'Ajouter une place'}</DialogTitle>
       <DialogContent>
         <TextField
+          disabled
           autoFocus
           margin="dense"
           name="number"
@@ -96,7 +118,7 @@ const AddPlaceModal: React.FC<AddPlaceModalProps> = ({ open, onClose, onAdd, bui
             value={place.building}
             onChange={handleSelectChange}
           >
-            {buildings.map((building) => (
+            {listBuilding.map((building) => (
               <MenuItem key={building} value={building}>
                 {building}
               </MenuItem>

@@ -3,7 +3,7 @@ import { AppBar, Drawer, MenuItem, IconButton, Paper, TextField, Button, Box, Ty
 import { SetStateAction, useState } from "react";
 import firebase from "firebase/compat";
 
-type redirectToHome = () => void
+type redirectToHome = (email: string) => void
 type setSignIn = () => void
 export default function Login({ redirectToHome, setSignIn }: Readonly<{ redirectToHome: redirectToHome, setSignIn : setSignIn }>) {
   const [email, setEmail] = useState("")
@@ -27,7 +27,7 @@ export default function Login({ redirectToHome, setSignIn }: Readonly<{ redirect
 
     if (email && password) {
       console.log(email, password)
-      redirectToHome()
+      redirectToHome(email)
     }
   }
 

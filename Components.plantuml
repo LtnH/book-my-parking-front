@@ -1,0 +1,332 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype polyline
+
+class node17 as "@mui/.../AdapterDayjs.d.ts" {
+   AdapterDayjs: 
+}
+class node12 as "@mui/.../DateField.d.ts" {
+   DateField: 
+}
+class node22 as "@mui/.../DatePicker.d.ts" {
+   DatePicker: 
+}
+class node20 as "@mui/.../LocalizationProvider.d.ts" {
+   LocalizationProvider: 
+}
+class node13 as "@mui/.../SelectInput.d.ts" {
+   SelectChangeEvent: 
+}
+class node16 as "@mui/.../SvgIcon.d.ts"
+class node4 as "@mui/.../TimePicker.d.ts" {
+   TimePicker: 
+}
+class node7 as "@mui/.../index.d.ts" {
+   AppBar: 
+   Autocomplete: 
+   Box: 
+   Button: 
+   Checkbox: 
+   Dialog: 
+   DialogActions: 
+   DialogContent: 
+   DialogTitle: 
+   Drawer: 
+   FormControl: 
+   FormControlLabel: 
+   FormGroup: 
+   IconButton: 
+   InputLabel: 
+   Menu: 
+   MenuItem: 
+   Paper: 
+   Select: 
+   TextField: 
+   Toolbar: 
+   Typography: 
+}
+class node8 as "@mui/.../index.d.ts" {
+   AccountCircle: 
+}
+class node14 as "@types/.../index.d.ts" {
+   Component: 
+   SetStateAction: 
+   useEffect: 
+   useState: 
+}
+class node1 as "AdminComponent/locationDetail.tsx" {
+   DATE_FORMAT: 
+   EventItem: 
+   React: 
+   Scheduler: 
+   SchedulerData: 
+   ViewType: 
+   dayjs: 
+   style.css: 
+   useState: 
+}
+class node5 as "Components/logout.js" {
+   AppBar: 
+   Button: 
+   Component: 
+   Drawer: 
+   IconButton: 
+   MenuItem: 
+   Paper: 
+   React: 
+   TextField: 
+}
+class node3 as "Form/AddPlace.tsx" {
+   AdapterDayjs: 
+   Autocomplete: 
+   Box: 
+   Button: 
+   DateField: 
+   Dayjs: 
+   LocalizationProvider: 
+   React: 
+   TextField: 
+   dayjs: 
+   useState: 
+}
+class node6 as "Form/Login.tsx" {
+   AppBar: 
+   Box: 
+   Button: 
+   Drawer: 
+   IconButton: 
+   MenuItem: 
+   Paper: 
+   React: 
+   SetStateAction: 
+   TextField: 
+   Typography: 
+   firebase: 
+   useState: 
+}
+class node15 as "Form/Signup.tsx" {
+   Box: 
+   Button: 
+   React: 
+   TextField: 
+   Typography: 
+   VehicleSelection: 
+   useState: 
+}
+class node11 as "Modal/AddBuildingModal.tsx" {
+   Autocomplete: 
+   Button: 
+   Dialog: 
+   DialogActions: 
+   DialogContent: 
+   DialogTitle: 
+   React: 
+   TextField: 
+   useEffect: 
+   useState: 
+}
+class node2 as "Modal/AddPlaceModal.tsx" {
+   Button: 
+   Dialog: 
+   DialogActions: 
+   DialogContent: 
+   DialogTitle: 
+   FormControl: 
+   InputLabel: 
+   MenuItem: 
+   React: 
+   Select: 
+   SelectChangeEvent: 
+   TextField: 
+   Typography: 
+   VehicleSelection: 
+   useEffect: 
+   useState: 
+}
+class node9 as "Modal/AddReservationModal.tsx" {
+   Button: 
+   Checkbox: 
+   DatePicker: 
+   Dayjs: 
+   Dialog: 
+   DialogActions: 
+   DialogContent: 
+   DialogTitle: 
+   DirectionsBikeIcon: 
+   DirectionsCarIcon: 
+   FormControl: 
+   FormControlLabel: 
+   FormGroup: 
+   InputLabel: 
+   LocalShippingIcon: 
+   MenuItem: 
+   React: 
+   Select: 
+   SelectChangeEvent: 
+   TextField: 
+   TimePicker: 
+   TwoWheelerIcon: 
+   Typography: 
+   dayjs: 
+   useState: 
+}
+class node21 as "NavBar/NavBar.tsx" {
+   AccountCircle: 
+   AppBar: 
+   Box: 
+   Button: 
+   IconButton: 
+   Menu: 
+   MenuIcon: 
+   MenuItem: 
+   React: 
+   SetStateAction: 
+   Toolbar: 
+   Typography: 
+}
+class node19 as "dayjs/index.d.ts" {
+   Dayjs: 
+}
+class node23 as "firebase/.../index.d.ts"
+class node0 as "react-big-schedule/.../index.d.ts" {
+   DATE_FORMAT: 
+   EventItem: 
+   Scheduler: 
+   SchedulerData: 
+   ViewType: 
+}
+class node18 as "react-big-schedule/.../style.css"
+class node10 as "vehiculeSelector/VehicleSelecton.tsx" {
+   Checkbox: 
+   DirectionsBikeIcon: 
+   DirectionsCarIcon: 
+   FormControlLabel: 
+   FormGroup: 
+   LocalShippingIcon: 
+   React: 
+   TwoWheelerIcon: 
+}
+
+node1   <-[#595959,plain]-  node14 
+node1   <-[#595959,plain]-  node14 
+node1   <-[#595959,plain]-  node19 
+node1   <-[#595959,plain]-  node0  
+node1   <-[#595959,plain]-  node0  
+node1   <-[#595959,plain]-  node0  
+node1   <-[#595959,plain]-  node0  
+node1   <-[#595959,plain]-  node0  
+node1   <-[#595959,plain]-  node18 
+node5   <-[#595959,plain]-  node7  
+node5   <-[#595959,plain]-  node7  
+node5   <-[#595959,plain]-  node7  
+node5   <-[#595959,plain]-  node7  
+node5   <-[#595959,plain]-  node7  
+node5   <-[#595959,plain]-  node7  
+node5   <-[#595959,plain]-  node7  
+node5   <-[#595959,plain]-  node14 
+node5   <-[#595959,plain]-  node14 
+node3   <-[#595959,plain]-  node17 
+node3   <-[#595959,plain]-  node12 
+node3   <-[#595959,plain]-  node20 
+node3   <-[#595959,plain]-  node7  
+node3   <-[#595959,plain]-  node7  
+node3   <-[#595959,plain]-  node7  
+node3   <-[#595959,plain]-  node7  
+node3   <-[#595959,plain]-  node14 
+node3   <-[#595959,plain]-  node14 
+node3   <-[#595959,plain]-  node19 
+node3   <-[#595959,plain]-  node19 
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node7  
+node6   <-[#595959,plain]-  node14 
+node6   <-[#595959,plain]-  node14 
+node6   <-[#595959,plain]-  node14 
+node6   <-[#595959,plain]-  node23 
+node15  <-[#595959,plain]-  node7  
+node15  <-[#595959,plain]-  node7  
+node15  <-[#595959,plain]-  node7  
+node15  <-[#595959,plain]-  node7  
+node15  <-[#595959,plain]-  node14 
+node15  <-[#595959,plain]-  node14 
+node15  <-[#595959,plain]-  node10 
+node11  <-[#595959,plain]-  node7  
+node11  <-[#595959,plain]-  node7  
+node11  <-[#595959,plain]-  node7  
+node11  <-[#595959,plain]-  node7  
+node11  <-[#595959,plain]-  node7  
+node11  <-[#595959,plain]-  node7  
+node11  <-[#595959,plain]-  node7  
+node11  <-[#595959,plain]-  node14 
+node11  <-[#595959,plain]-  node14 
+node11  <-[#595959,plain]-  node14 
+node2   <-[#595959,plain]-  node13 
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node7  
+node2   <-[#595959,plain]-  node14 
+node2   <-[#595959,plain]-  node14 
+node2   <-[#595959,plain]-  node14 
+node2   <-[#595959,plain]-  node10 
+node9   <-[#595959,plain]-  node22 
+node9   <-[#595959,plain]-  node13 
+node9   <-[#595959,plain]-  node16 
+node9   <-[#595959,plain]-  node16 
+node9   <-[#595959,plain]-  node16 
+node9   <-[#595959,plain]-  node16 
+node9   <-[#595959,plain]-  node4  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node7  
+node9   <-[#595959,plain]-  node14 
+node9   <-[#595959,plain]-  node14 
+node9   <-[#595959,plain]-  node19 
+node9   <-[#595959,plain]-  node19 
+node21  <-[#595959,plain]-  node16 
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node8  
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node7  
+node21  <-[#595959,plain]-  node14 
+node21  <-[#595959,plain]-  node14 
+node10  <-[#595959,plain]-  node16 
+node10  <-[#595959,plain]-  node16 
+node10  <-[#595959,plain]-  node16 
+node10  <-[#595959,plain]-  node16 
+node10  <-[#595959,plain]-  node7  
+node10  <-[#595959,plain]-  node7  
+node10  <-[#595959,plain]-  node7  
+node10  <-[#595959,plain]-  node14 
+@enduml

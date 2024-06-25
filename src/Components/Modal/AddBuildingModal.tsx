@@ -20,16 +20,18 @@ interface Building {
   name: string;
   address: string;
   city: string;
+  place: number;
   company: string[];
 }
 
-const companies = ['ESGI', 'Company A', 'Company B', 'Company C'];
+const companies = ['ESGI'];
 
 const AddBuildingModal: React.FC<AddBuildingModalProps> = ({ open, onClose, onAdd, buildingToEdit }) => {
   const [building, setBuilding] = useState<Building>({
     name: '',
     address: '',
     city: '',
+    place: 0,
     company: [],
   });
 
@@ -60,6 +62,7 @@ const AddBuildingModal: React.FC<AddBuildingModalProps> = ({ open, onClose, onAd
       name: '',
       address: '',
       city: '',
+      place: 0,
       company: [],
     });
     onClose();
@@ -73,7 +76,7 @@ const AddBuildingModal: React.FC<AddBuildingModalProps> = ({ open, onClose, onAd
           autoFocus
           margin="dense"
           name="name"
-          label="Nom"
+          label="Nom *"
           type="text"
           fullWidth
           variant="outlined"
@@ -83,7 +86,7 @@ const AddBuildingModal: React.FC<AddBuildingModalProps> = ({ open, onClose, onAd
         <TextField
           margin="dense"
           name="address"
-          label="Adresse"
+          label="Adresse *"
           type="text"
           fullWidth
           variant="outlined"
@@ -93,7 +96,7 @@ const AddBuildingModal: React.FC<AddBuildingModalProps> = ({ open, onClose, onAd
         <TextField
           margin="dense"
           name="city"
-          label="Ville"
+          label="Ville *"
           type="text"
           fullWidth
           variant="outlined"
@@ -110,7 +113,7 @@ const AddBuildingModal: React.FC<AddBuildingModalProps> = ({ open, onClose, onAd
             <TextField
               {...params}
               variant="outlined"
-              label="Société"
+              label="Société *"
               margin="dense"
               fullWidth
             />
