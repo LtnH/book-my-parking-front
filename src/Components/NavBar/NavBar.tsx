@@ -3,6 +3,7 @@ import { AppBar, Button, IconButton, Toolbar, Typography, Box, Menu, MenuItem } 
 import MenuIcon from '@mui/icons-material/Menu';
 import { AccountCircle } from "@mui/icons-material";
 import { SetStateAction } from "react";
+import {Link, redirect } from "react-router-dom";
 
 export default function NavBar({ isLogin, signIn, setSignIn }: Readonly<{
   isLogin: boolean,
@@ -18,7 +19,6 @@ export default function NavBar({ isLogin, signIn, setSignIn }: Readonly<{
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -61,9 +61,9 @@ export default function NavBar({ isLogin, signIn, setSignIn }: Readonly<{
               </div>
 
             ) : (signIn ? (
-                <Button color="inherit" onClick={() => setSignIn(false)}>Login</Button>
+                <Button color="inherit" onClick={() => setSignIn(false)}>Connexion</Button>
               ) : (
-                <Button color="inherit" onClick={() => setSignIn(true)}>Sign in</Button>
+                <Button color="inherit" onClick={() => setSignIn(true)}>Inscription</Button>
               )
             )
           }

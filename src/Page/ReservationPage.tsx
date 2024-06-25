@@ -81,16 +81,17 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ reservation, showActi
     >
       <CardContent>
         <Typography variant="h6">{reservation.place}</Typography>
-        <Typography variant="body2">Bâtiment : {reservation.building}</Typography>
-        <Typography variant="body2">Date : {format(new Date(reservation.date), 'dd/MM/yyyy')}</Typography>
-        <Typography variant="body2">Heure : {reservation.time}</Typography>
+        <Typography variant="body1">Heure de début : {reservation.time}</Typography>
+        <Typography variant="body2">site : {reservation.building}</Typography>
+        <Typography variant="body2">Date de début : {format(new Date(reservation.date), 'dd/MM/yyyy')}</Typography>
+        <Typography variant="body2">Date de fin : {format(new Date(reservation.date), 'dd/MM/yyyy')}</Typography>
+        <Typography variant="body2">Heure de début : {reservation.time}</Typography>
+        <Typography variant="body2">Heure de fin : {reservation.time}</Typography>
         {showActions && (
           <div style={{ marginTop: 16 }}>
-            <Button variant="contained" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
-              Éditer
+            <Button variant="text" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
             </Button>
-            <Button variant="contained" color="error" startIcon={<DeleteIcon />}>
-              Supprimer
+            <Button variant="text" color="error" startIcon={<DeleteIcon />}>
             </Button>
           </div>
         )}

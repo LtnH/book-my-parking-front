@@ -89,7 +89,7 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
   const handleEndDateChange = (date: Dayjs | null) => {
     setReservation({
       ...reservation,
-      endTime: date,
+      endDate: date,
     });
   };
 
@@ -140,6 +140,7 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
         <FormControl fullWidth margin="dense" sx={{ mb: 2 }}>
           <InputLabel>Société</InputLabel>
           <Select
+              required
             name="company"
             value={reservation.company}
             onChange={handleSelectChange}
@@ -154,6 +155,7 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
         <FormControl fullWidth margin="dense" sx={{ mb: 2 }}>
           <InputLabel>Bâtiment</InputLabel>
           <Select
+              required
             name="building"
             value={reservation.building}
             onChange={handleSelectChange}
@@ -165,7 +167,23 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
             ))}
           </Select>
         </FormControl>
+        <FormControl fullWidth margin="dense" sx={{ mb: 2 }}>
+          <InputLabel>Place</InputLabel>
+          <Select
+              required
+              name="place"
+              value={reservation.place}
+              onChange={handleSelectChange}
+          >
+            {places.map((place) => (
+                <MenuItem key={place} value={place}>
+                  {place}
+                </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <DatePicker
+
           label="Date de début"
           value={reservation.startDate}
           onChange={handleStartDateChange}
@@ -181,6 +199,7 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
         />
         <TimePicker
           label="Heure de début"
+          ampm={false}
           value={reservation.startDate}
           onChange={handleStartTimeChange}
           sx={{ mb: 2, mr: 5 }}
@@ -188,6 +207,7 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
         />
         <TimePicker
           label="Heure de fin"
+          ampm={false}
           value={reservation.endTime}
           onChange={handleEndTimeChange}
           sx={{ mb: 2 }}
@@ -246,27 +266,13 @@ const AddReservationModal: React.FC<AddReservationModalProps> = ({
             label="Electric"
           />
         </FormGroup>
-        <FormControl fullWidth margin="dense" sx={{ mb: 2 }}>
-          <InputLabel>Place</InputLabel>
-          <Select
-            name="place"
-            value={reservation.place}
-            onChange={handleSelectChange}
-          >
-            {places.map((place) => (
-              <MenuItem key={place} value={place}>
-                {place}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} variant="contained" color="error">
           Annuler
         </Button>
         <Button onClick={handleAddReservation} variant="contained" color="primary">
-          Ajouter
+          Créer une réservation
         </Button>
       </DialogActions>
     </Dialog>

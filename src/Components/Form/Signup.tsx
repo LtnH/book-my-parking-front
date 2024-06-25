@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import VehicleSelection from "../vehiculeSelector/VehicleSelecton";
 
-export default function Signup() {
+type setSignIn = () => void
+
+export default function Signup({setSignIn} : {setSignIn : setSignIn})  {
   const [email, setEmail] = useState("")
   const [type, setType] = useState<string[]>([])
   const [password, setPassword] = useState("")
@@ -58,7 +60,7 @@ export default function Signup() {
       sx={{ marginLeft: "auto", marginRight: "auto" }}
     >
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <h3>Créez votre compte</h3>
+        <h3>Créer votre compte</h3>
         <TextField
           label="Email"
           onChange={e => setEmail(e.target.value)}
@@ -72,7 +74,7 @@ export default function Signup() {
           error={emailError}
         />
         <TextField
-          label="Password"
+          label="Mot de passe"
           onChange={e => setPassword(e.target.value)}
           required
           variant="outlined"
@@ -84,7 +86,7 @@ export default function Signup() {
           sx={{ mb: 3 }}
         />
         <TextField
-          label="comfirmé votre Password"
+          label="comfirmez votre mot de passe"
           onChange={e => setPasswordCofirm(e.target.value)}
           required
           variant="outlined"
@@ -101,7 +103,7 @@ export default function Signup() {
           required
           variant="outlined"
           color="secondary"
-          type="password"
+          type="text"
           value={name}
           error={nameError}
           fullWidth
@@ -113,17 +115,18 @@ export default function Signup() {
           required
           variant="outlined"
           color="secondary"
-          type="password"
+          type="text"
           value={surname}
           error={surnameError}
           fullWidth
           sx={{ mb: 3 }}
         />
         <Typography variant="subtitle1" sx={{ marginTop: 2, textAlign: "left" }}>
-          Place préférer
+          Préférence véhicule
         </Typography>
         <VehicleSelection selectedTypes={type} onChange={handleTypeChange} />
-        <Button variant="contained" color="primary" type="submit">sign in</Button>
+        <Button variant="contained" color="primary" type="submit">Créer votre compte</Button>
+        <p>vous possédez déjà un compte ? <a href='#' onClick={setSignIn}>connectez vous</a></p>
       </form>
     </Box>
   );

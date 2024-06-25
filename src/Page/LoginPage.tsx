@@ -21,7 +21,7 @@ export default function LoginPage({auth, setAuth, signIn, setSignIn}: Readonly<{
 
   return (
     <div className="App">
-      {signIn ? (<Signup/>) : (<Login redirectToHome={redirectToHome}/>)}
+      {signIn ? (<Signup setSignIn={setSignIn}/>) : (<Login redirectToHome={redirectToHome} setSignIn={setSignIn}/>)}
     </div>
 
   )

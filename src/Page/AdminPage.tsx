@@ -115,10 +115,10 @@ const AdminPage: React.FC = () => {
       }}
     >
       <Typography variant="h4" gutterBottom sx={{ marginBottom: 2, color: '#3f51b5' }}>
-        Gérer vos Bâtiment
+        Gérer vos sites
       </Typography>
       <Typography variant="h5" gutterBottom sx={{ marginBottom: 2, color: '#3f51b5' }}>
-        Bâtiment :
+        sites :
       </Typography>
       <Grid container justifyContent="flex-end" sx={{ marginBottom: 2 }}>
         <Button
@@ -148,7 +148,7 @@ const AdminPage: React.FC = () => {
                 <TableCell>{building.address}</TableCell>
                 <TableCell>{building.city}</TableCell>
                 <TableCell>{building.company.join(', ')}</TableCell>
-                <TableCell>
+                <TableCell align="left">
                   <IconButton color="primary" onClick={() => handleOpenEditBuildingModal(building)}>
                     <EditIcon />
                   </IconButton>
